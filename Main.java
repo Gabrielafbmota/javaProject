@@ -24,31 +24,22 @@ public class Main extends JFrame {
 	public JPanel mainPanel = new JPanel(new GridLayout(DIM_X, DIM_Y));
 	public Main() {
 		
-      setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		this.init();
+		
+		this.pack();
+		this.setVisible(true);
+		
+		int players = 1000;
+		Jogadores jogador = null;
 
-      this.init();
-      
-      this.pack();
-			this.setVisible(true);
-			
-			int players = 1000;
-
-			List<Jogadores> jogadores = new ArrayList<Jogadores>();
-			for(int i = 0; i <= players; i++){
-				Jogadores jogador = new Jogadores(squares);
-				jogadores.add(jogador);
-			}
-			for (Jogadores item : jogadores){
-				item.start();
+		
+		for(int i = 0; i <= players; i++){
+				jogador = new Jogadores(squares);
+				jogador.start();
 			}
 			
-			for(Jogadores item : jogadores){
-				try {
-					item.join();				
-				} catch(InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
 			
 			
 		}
