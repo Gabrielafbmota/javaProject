@@ -68,30 +68,139 @@ public class Jogadores extends Thread {
   }
 
   public void walk() {
+    Jogadores j2 = null;
     switch (this.dir) {
       case 1:
-        System.out.println(x);
+        if(x + 1 >= squares.length){
+          dir = new Random().nextInt(8) + 1;
+          walk();
+          return;
+        }
+        j2 = matriz[x+1][y];
+        if(j2 != null){
+          collision(j2);
+          return;
+        }
+        eraseTrail();
+        x++;
+        realMove();
+        return;
 
       case 2:
-        System.out.println(x);
+        if(x - 1 < 0){
+          dir = new Random().nextInt(8) + 1;
+          walk();
+          return;
+        }
+        j2 = matriz[x-1][y];
+        if(j2 != null){
+          collision(j2);
+          return;
+        }
+        eraseTrail();
+        x--;
+        realMove();
+        return;
 
       case 3:
-        System.out.println(x);
+        if(y + 1 >= squares[0].length){
+          dir = new Random().nextInt(8) + 1;
+          walk();
+          return;
+        }
+        j2 = matriz[x][y+1];
+        if(j2 != null){
+          collision(j2);
+          return;
+        }
+        eraseTrail();
+        y++;
+        realMove();
+        return;
 
       case 4:
-        System.out.println(x);
+        if(y - 1 < 0){
+          dir = new Random().nextInt(8) + 1;
+          walk();
+          return;
+        }
+        j2 = matriz[x][y-1];
+        if(j2 != null){
+          collision(j2);
+          return;
+        }
+        eraseTrail();
+        y--;
+        realMove();
+        return;
 
       case 5:
-        System.out.println(x);
+        if(x + 1 >= squares.length || y + 1 >= squares[0].length){
+          dir  = new Random().nextInt(8) + 1;
+          walk();
+          return;
+        }
+        j2 = matriz[x + 1][y + 1];
+        if(j2 != null){
+            collision(j2);
+            return;
+        }
+        eraseTrail();
+        x++;
+        y++;
+        realMove();
+        return;
 
       case 6:
-        System.out.println(x);
+        if(x + 1 >= squares.length || y - 1 < 0){
+          dir  = new Random().nextInt(8) + 1;
+          walk();
+          return;
+        }
+        j2 = matriz[x + 1][y - 1];
+        if(j2 != null){
+            collision(j2);
+            return;
+        }
+        eraseTrail();
+        x++;
+        y--;
+        realMove();
+        return;
 
       case 7:
-        System.out.println(x);
+        if(x - 1 < 0|| y - 1 < 0){
+          dir  = new Random().nextInt(8) + 1;
+          walk();
+          return;
+        }
+        j2 = matriz[x - 1][y - 1];
+        if(j2 != null){
+            collision(j2);
+            return;
+        }
+        eraseTrail();
+        x--;
+        y--;
+        realMove();
+        return;
 
       case 8:
-        System.out.println(x);
+        if(x - 1 < 0|| y + 1 >= squares[0].length){
+          dir  = new Random().nextInt(8) + 1;
+          walk();
+          return;
+        }
+        j2 = matriz[x - 1][y + 1];
+        if(j2 != null){
+            collision(j2);
+            return;
+        }
+        eraseTrail();
+        x--;
+        y++;
+        realMove();
+        return;
 
     }
   }
