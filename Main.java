@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
@@ -19,9 +20,11 @@ public class Main extends JFrame {
 	public static final int DIM_Y = 50;
 
 	public static final Color BACKGROUND_COLOR = Color.lightGray;
-			
+	
+	private Jogadores[][] matriz = new Jogadores[DIM_X][DIM_Y];
 	private JPanel[][] squares = new JPanel[DIM_X][DIM_Y];
 	public JPanel mainPanel = new JPanel(new GridLayout(DIM_X, DIM_Y));
+
 	public Main() {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -30,19 +33,7 @@ public class Main extends JFrame {
 		
 		this.pack();
 		this.setVisible(true);
-		
-		int players = 1000;
-		Jogadores jogador = null;
-
-		
-		for(int i = 0; i <= players; i++){
-				jogador = new Jogadores(squares);
-				jogador.start();
-			}
-			
-			
-			
-		}
+	}
 
 	private void init() {
 		Container c = getContentPane();
@@ -62,8 +53,19 @@ public class Main extends JFrame {
 	
 	 
 	public static void main(String[] args){
-		new Main();
+		Main main = new Main();
+		int players = new Random().nextInt(30) + 20;
+		ArrayList<Jogadores> jogadores = new ArrayList<Jogadores>();
 		
+		for(int i = 0; i <= players; i++){
+			jogadores.add(new Jogadores(main.squares));
+		}
+		for(Iterator<Jogadores> i = jogadores.iterator(); i.hasNext();){
+			Jogadores j = i.next();
+			j.setMatriz(main.matriz);
+			j.start();
+		}
+
 	}
 
 }
